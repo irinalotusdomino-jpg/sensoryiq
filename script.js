@@ -29,6 +29,14 @@ window.addEventListener('mousemove', (e) => {
   targetX = e.clientX;
   targetY = e.clientY;
 });
+window.addEventListener('touchmove', (e) => {
+  const t = e.touches[0];
+  if (t) { targetX = t.clientX; targetY = t.clientY; }
+}, { passive: true });
+window.addEventListener('touchstart', (e) => {
+  const t = e.touches[0];
+  if (t) { orbX = t.clientX; orbY = t.clientY; targetX = orbX; targetY = orbY; }
+}, { passive: true });
 
 function animateOrb() {
   orbX += (targetX - orbX) * 0.08;
@@ -57,15 +65,20 @@ if (heroField) {
     heroField.appendChild(dot);
     dots.push({ el: dot, depth: 0.5 + Math.random() * 1.5 });
   }
-  window.addEventListener('mousemove', (e) => {
+  const updateDots = (clientX, clientY) => {
     if (prefersReduced) return;
     const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-    const dx = (e.clientX - cx) / cx;
-    const dy = (e.clientY - cy) / cy;
+    const dx = (clientX - cx) / cx;
+    const dy = (clientY - cy) / cy;
     dots.forEach(({ el, depth }) => {
       el.style.transform = `translate(${dx * depth * 14}px, ${dy * depth * 14}px)`;
     });
-  });
+  };
+  window.addEventListener('mousemove', (e) => updateDots(e.clientX, e.clientY));
+  window.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    if (t) updateDots(t.clientX, t.clientY);
+  }, { passive: true });
 }
 
 // ============ Scroll reveal ============
