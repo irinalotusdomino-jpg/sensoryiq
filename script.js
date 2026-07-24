@@ -4,6 +4,15 @@ const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 20);
 document.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
+// ============ Back to top ============
+const toTop = document.getElementById('toTop');
+const onScrollToTop = () => toTop?.classList.toggle('visible', window.scrollY > 480);
+document.addEventListener('scroll', onScrollToTop, { passive: true });
+onScrollToTop();
+toTop?.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 // ============ Mobile nav ============
 const burger = document.getElementById('burger');
 const nav = document.getElementById('mainNav');

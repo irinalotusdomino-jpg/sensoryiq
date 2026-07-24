@@ -368,6 +368,22 @@ code{ background: var(--surface-2); padding: 2px 8px; border-radius: 6px; font-s
 .footer-inner{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap: 12px; font-size:0.85rem; color: var(--muted); }
 .footer-inner .logo img{ height: 32px; opacity: 0.85; }
 
+/* ---------------- BACK TO TOP ---------------- */
+.to-top{
+  position: fixed; right: 24px; bottom: 24px; z-index: 90;
+  width: 48px; height: 48px; border-radius: 50%; border: 0; cursor:pointer;
+  background: var(--accent-deep); color: var(--bg);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: var(--shadow-soft);
+  opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: opacity .3s var(--ease), transform .3s var(--ease), background .3s;
+}
+.to-top:hover{ background: var(--accent); }
+.to-top.visible{ opacity: 1; transform: translateY(0); pointer-events: auto; }
+@media (max-width: 720px){
+  .to-top{ right: 16px; bottom: 16px; width: 44px; height: 44px; }
+}
+
 /* ---------------- REVEAL ANIMATIONS ---------------- */
 .reveal{
   opacity: 0; transform: translateY(28px);
