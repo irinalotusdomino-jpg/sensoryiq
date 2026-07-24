@@ -118,7 +118,8 @@ document.querySelectorAll('.video-card').forEach(card => {
     src.addEventListener('error', () => card.classList.add('no-source'));
   });
 
-  playBtn?.addEventListener('click', () => {
+  const toggle = () => {
+    if (card.classList.contains('no-source')) return;
     if (video.paused) {
       video.muted = false;
       video.play().then(() => card.classList.add('is-playing')).catch(() => {
@@ -128,7 +129,12 @@ document.querySelectorAll('.video-card').forEach(card => {
       video.pause();
       card.classList.remove('is-playing');
     }
-  });
+  };
+
+  // the whole card toggles play/pause — not just the (fading) play icon,
+  // so a video that's already playing can always be stopped again
+  card.addEventListener('click', toggle);
+  playBtn?.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
 });
 
 // ============ Footer year ============
