@@ -42,7 +42,7 @@ if (heroField) {
     dot.style.width = `${size}px`;
     dot.style.height = `${size}px`;
     dot.style.left = `${Math.random() * 100}%`;
-    dot.style.top = `${Math.random() * 100}%`;
+    dot.style.top = `${Math.random() * 58}%`;
     dot.style.background = palette[i % palette.length];
     dot.style.opacity = (0.25 + Math.random() * 0.35).toFixed(2);
     heroField.appendChild(dot);
