@@ -4,17 +4,6 @@ const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 20);
 document.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-// ============ Keep --topbar-h in sync with the real (review strip + header) height ============
-const topBar = document.getElementById('topBar');
-function syncTopBarHeight() {
-  if (!topBar) return;
-  document.documentElement.style.setProperty('--topbar-h', `${topBar.offsetHeight}px`);
-}
-syncTopBarHeight();
-window.addEventListener('resize', syncTopBarHeight);
-window.addEventListener('load', syncTopBarHeight);
-if (document.fonts?.ready) document.fonts.ready.then(syncTopBarHeight);
-
 // ============ Mobile nav ============
 const burger = document.getElementById('burger');
 const nav = document.getElementById('mainNav');
