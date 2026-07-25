@@ -132,20 +132,21 @@ document.querySelectorAll('.video-card').forEach(card => {
   const playBtn = card.querySelector('.video-play');
   if (!video) return;
 
-  // assume placeholder until the video proves it has a real, playable source
-  card.classList.add('no-source');
-  video.addEventListener('loadedmetadata', () => card.classList.remove('no-source'));
+  // only mark as a genuinely missing/broken source on an actual error —
+  // never just because metadata hasn't finished loading yet (that used to
+  // block clicks on slower connections until the page was reloaded)
   video.addEventListener('error', () => card.classList.add('no-source'));
   video.querySelectorAll('source').forEach(src => {
     src.addEventListener('error', () => card.classList.add('no-source'));
   });
 
   const toggle = () => {
-    if (card.classList.contains('no-source')) return;
     if (video.paused) {
       video.muted = false;
+      card.classList.remove('no-source');
       video.play().then(() => card.classList.add('is-playing')).catch(() => {
-        // autoplay/policy or missing file — keep fallback visible
+        // only show the fallback if the browser actually reports no playable source
+        if (video.error) card.classList.add('no-source');
       });
     } else {
       video.pause();
