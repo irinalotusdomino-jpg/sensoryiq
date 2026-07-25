@@ -335,15 +335,54 @@
       <p class="eyebrow reveal center">Простір</p>
       <h2 class="h2 reveal center">Місце, створене для відчуттів</h2>
       <div class="gallery-grid">
-        <div class="gallery-item reveal g-tall" data-tone="1"><span>Сенсорна кімната</span></div>
-        <div class="gallery-item reveal" data-tone="2"><span>Логопедія</span></div>
-        <div class="gallery-item reveal" data-tone="3"><span>Творчість</span></div>
-        <div class="gallery-item reveal" data-tone="4"><span>Хатха-йога</span></div>
-        <div class="gallery-item reveal g-tall" data-tone="5"><span>Гра з водою</span></div>
-        <div class="gallery-item reveal" data-tone="1"><span>Баланс і координація</span></div>
+        <button type="button" class="gallery-item reveal g-tall"
+          data-title="Сенсорна кімната"
+          data-text="Простір з м'яким світлом і гойдалками, де діти навчаються заспокоюватись, тримати баланс і концентрацію.">
+          <img src="assets/gallery-space/sensorna-kimnata.jpg" alt="Сенсорна кімната sensoryIQ" loading="lazy">
+          <span class="gallery-caption">Сенсорна кімната</span>
+        </button>
+        <button type="button" class="gallery-item reveal"
+          data-title="Логопедія"
+          data-text="Індивідуальні заняття з логопедом у грі — вправи на баланс, звуки та артикуляцію.">
+          <img src="assets/gallery-space/logopediya.jpg" alt="Логопедія sensoryIQ" loading="lazy">
+          <span class="gallery-caption">Логопедія</span>
+        </button>
+        <button type="button" class="gallery-item reveal"
+          data-title="Творчість"
+          data-text="Малювання, ліплення та інші творчі активності для розвитку дрібної моторики й уяви.">
+          <img src="assets/gallery-space/tvorchist.jpg" alt="Творчість sensoryIQ" loading="lazy">
+          <span class="gallery-caption">Творчість</span>
+        </button>
+        <button type="button" class="gallery-item reveal"
+          data-title="Хатха-йога"
+          data-text="Спокійні заняття з диханням, розтяжкою та балансом тіла — для дітей і дорослих.">
+          <img src="assets/gallery-space/hatha-yoga.jpg" alt="Хатха-йога sensoryIQ" loading="lazy">
+          <span class="gallery-caption">Хатха-йога</span>
+        </button>
+        <button type="button" class="gallery-item reveal g-tall"
+          data-title="Гра з водою"
+          data-text="Сенсорні ігри з водою розвивають дотик і допомагають дітям досліджувати нові відчуття.">
+          <img src="assets/gallery-space/gra-z-vodoyu.jpg" alt="Гра з водою sensoryIQ" loading="lazy">
+          <span class="gallery-caption">Гра з водою</span>
+        </button>
+        <button type="button" class="gallery-item reveal"
+          data-title="Баланс і координація"
+          data-text="Вправи на сенсорних гойдалках для розвитку вестибулярного апарату, балансу та концентрації уваги.">
+          <img src="assets/gallery-space/balans.jpg" alt="Баланс і координація sensoryIQ" loading="lazy">
+          <span class="gallery-caption">Баланс і координація</span>
+        </button>
       </div>
     </div>
   </section>
+
+  <!-- GALLERY POPUP -->
+  <div class="modal-overlay" id="galleryModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle"></h3>
+      <p id="modalText"></p>
+      <button type="button" class="btn btn-primary" id="modalClose">Ок</button>
+    </div>
+  </div>
 
   <!-- REVIEWS -->
   <section class="section reviews" id="reviews">

@@ -160,6 +160,38 @@ document.querySelectorAll('.video-card').forEach(card => {
   playBtn?.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
 });
 
+// ============ Gallery popup ============
+const galleryModal = document.getElementById('galleryModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalText = document.getElementById('modalText');
+const modalClose = document.getElementById('modalClose');
+
+function openGalleryModal(title, text) {
+  if (!galleryModal) return;
+  modalTitle.textContent = title;
+  modalText.textContent = text;
+  galleryModal.classList.add('open');
+  galleryModal.setAttribute('aria-hidden', 'false');
+}
+function closeGalleryModal() {
+  if (!galleryModal) return;
+  galleryModal.classList.remove('open');
+  galleryModal.setAttribute('aria-hidden', 'true');
+}
+
+document.querySelectorAll('.gallery-item').forEach(item => {
+  item.addEventListener('click', () => {
+    openGalleryModal(item.dataset.title || '', item.dataset.text || '');
+  });
+});
+modalClose?.addEventListener('click', closeGalleryModal);
+galleryModal?.addEventListener('click', (e) => {
+  if (e.target === galleryModal) closeGalleryModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeGalleryModal();
+});
+
 // ============ Footer year ============
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
