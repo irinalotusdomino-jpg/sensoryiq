@@ -377,6 +377,9 @@ code{ background: var(--surface-2); padding: 2px 8px; border-radius: 6px; font-s
 /* ---------------- FOOTER ---------------- */
 .site-footer{ padding: 34px 0; }
 .footer-inner{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap: 12px; font-size:0.85rem; color: var(--muted); }
+.footer-links{ display:flex; align-items:center; gap: 18px; }
+.footer-links a{ transition: color .2s; }
+.footer-links a:hover{ color: var(--accent); }
 .footer-inner .logo img{ height: 54px; opacity: 0.9; }
 
 /* ---------------- BACK TO TOP ---------------- */
