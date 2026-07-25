@@ -207,6 +207,7 @@ code{ background: var(--surface-2); padding: 2px 8px; border-radius: 6px; font-s
   background: var(--surface-2); box-shadow: var(--shadow-soft);
   position:relative;
 }
+.media-photo{ width:100%; height:100%; object-fit:cover; display:block; }
 .media-placeholder{
   width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
   gap: 14px; position:relative;
@@ -245,24 +246,22 @@ code{ background: var(--surface-2); padding: 2px 8px; border-radius: 6px; font-s
 }
 .promo-text{ font-weight:700; margin:0; }
 .card{
-  position: relative; overflow: hidden;
-  border-radius: var(--radius-md);
+  display:block;
+  background: var(--surface); border-radius: var(--radius-md); padding: 32px 24px;
   border: 1px solid var(--line);
-  min-width: 0; min-height: 320px;
-  display:flex; align-items:flex-end;
-  background-size: cover; background-position: center;
+  min-width: 0;
   transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s;
 }
 .card:hover{ transform: translateY(-8px); box-shadow: var(--shadow-soft); border-color: transparent; }
-.card-body{
-  position: relative; z-index: 2; width: 100%;
-  background: rgba(250,247,241,0.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  padding: 22px 24px;
-}
-.card-icon{ width: 44px; height:44px; margin-bottom: 14px; }
+.card-icon{ width: 44px; height:44px; margin-bottom: 16px; }
 .card-icon svg{ width:100%; height:100%; fill:none; stroke: var(--accent); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
 .card h3{ font-size: 1.05rem; margin-bottom: 8px; }
-.card p{ color: var(--muted); font-size: 0.92rem; margin:0; }
+.card p{ color: var(--muted); font-size: 0.92rem; margin:0 0 14px; }
+.card-more{
+  display:inline-block; font-family:'Manrope',sans-serif; font-weight:700; font-size: 0.84rem;
+  color: var(--accent); transition: transform .3s var(--ease);
+}
+.card:hover .card-more{ transform: translateX(4px); }
 
 /* ---------------- VIDEO ---------------- */
 .video-section{ background: var(--surface); }
@@ -410,24 +409,31 @@ code{ background: var(--surface-2); padding: 2px 8px; border-radius: 6px; font-s
 
 .program-gallery-section{ background: var(--surface); }
 .program-gallery{
-  display:grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 44px;
+  display:grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 44px;
+  max-width: 900px; margin-left:auto; margin-right:auto;
 }
 .pg-item{
-  border-radius: var(--radius-md); overflow:hidden; aspect-ratio: 4/5;
+  position: relative;
+  border-radius: var(--radius-sm); overflow:hidden; aspect-ratio: 1/1;
   box-shadow: var(--shadow-soft);
 }
 .pg-item img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .5s var(--ease); }
 .pg-item:hover img{ transform: scale(1.05); }
+/* video tiles reuse .video-card behaviour but at the smaller square size */
+.pg-item.video-card{ aspect-ratio: 1/1; }
+.pg-item.video-card .play-icon{ width: 30px; height: 30px; }
+.pg-item.video-card .video-play{ width: 42px; height: 42px; }
 
 /* photo variant of the video cards used in "Заняття очима дітей" */
 .photo-card{ cursor: default; }
 .photo-card .video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 
 @media (max-width: 900px){
-  .program-gallery{ grid-template-columns: repeat(2,1fr); }
+  .program-gallery{ grid-template-columns: repeat(3,1fr); }
 }
 @media (max-width: 640px){
   .page-hero{ padding-top: 140px; }
+  .program-gallery{ grid-template-columns: repeat(2,1fr); gap: 10px; }
 }
 
 /* ---------------- REVEAL ANIMATIONS ---------------- */
@@ -472,8 +478,6 @@ code{ background: var(--surface-2); padding: 2px 8px; border-radius: 6px; font-s
   .hero-stats{ gap: 14px; max-width: 340px; }
   .scroll-cue{ display:none; }
   .cards-grid{ grid-template-columns: 1fr; }
-  .card{ min-height: 240px; }
-  .card-body{ padding: 20px; }
   .contact-actions{ flex-direction:column; align-items:stretch; }
   .contact-actions .btn{ text-align:center; justify-content:center; }
 }
