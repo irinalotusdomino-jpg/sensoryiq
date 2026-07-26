@@ -285,9 +285,13 @@ form?.addEventListener('submit', async (e) => {
   formStatus.textContent = '';
   formStatus.className = 'form-status';
 
-  const phoneValid = isValidPhone(phoneInput.value);
+  const phoneValue = phoneInput.value.trim();
+  const phoneValid = phoneValue !== '' && isValidPhone(phoneValue);
   if (!phoneValid) {
     phoneInput.classList.add('field-invalid');
+    phoneError.textContent = phoneValue === ''
+      ? 'Будь ласка, заповніть номер телефону'
+      : 'Введіть коректний номер телефону +380 XX XXX XX XX';
     phoneError.classList.add('show');
     phoneInput.focus();
     return;
