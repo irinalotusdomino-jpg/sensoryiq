@@ -256,7 +256,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 // який пересилає дані у Telegram-бот. Щоб перемкнути форму на
 // іншу людину/бізнес — просто заміни значення TELEGRAM_ENDPOINT
 // на URL її власного Worker'а (сам сайт більше ніде міняти не треба).
-const TELEGRAM_ENDPOINT = 'https://sensoryiq-contact-form.YOUR-SUBDOMAIN.workers.dev';
+const TELEGRAM_ENDPOINT = 'https://sensoryiq-contact-form.kirillova85irina.workers.dev';
 
 const form = document.getElementById('contactForm');
 const phoneInput = document.getElementById('phoneInput');
