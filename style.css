@@ -363,6 +363,13 @@ code{ background: var(--surface-2); padding: 2px 8px; border-radius: 6px; font-s
 .modal-box p{ color: var(--muted); margin-bottom: 22px; }
 .modal-box .btn{ width:100%; justify-content:center; }
 
+.phone-modal-number{
+  font-family:'Manrope', sans-serif; font-weight:800; font-size:1.7rem;
+  color: var(--ink); letter-spacing: 0.02em; margin-bottom: 8px;
+}
+.phone-modal-actions{ display:flex; flex-direction:column; gap:10px; }
+.phone-modal-actions .btn{ margin:0; }
+
 /* ---------------- REVIEWS ---------------- */
 .reviews-track{ display:grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 46px; }
 .review-card{

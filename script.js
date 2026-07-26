@@ -192,6 +192,61 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeGalleryModal();
 });
 
+// ============ Phone call button ============
+// На пристроях, що вміють дзвонити (телефони/планшети — грубо визначаємо
+// за "грубим" типом вказівника, тобто пальцем, а не мишкою), кнопка
+// поводиться як завжди: відкриває номеронабирач через tel:.
+// На десктопі (мишка/трекпад — дзвонити нема чим) замість переходу
+// показуємо віконце з номером, який можна скопіювати.
+function canLikelyCall() {
+  return window.matchMedia && window.matchMedia('(any-pointer: coarse)').matches;
+}
+
+const phoneCallBtn = document.getElementById('phoneCallBtn');
+const phoneModal = document.getElementById('phoneModal');
+const phoneModalNumber = document.getElementById('phoneModalNumber');
+const phoneModalCopy = document.getElementById('phoneModalCopy');
+const phoneModalClose = document.getElementById('phoneModalClose');
+
+function openPhoneModal() {
+  if (!phoneModal) return;
+  phoneModal.classList.add('open');
+  phoneModal.setAttribute('aria-hidden', 'false');
+}
+function closePhoneModal() {
+  if (!phoneModal) return;
+  phoneModal.classList.remove('open');
+  phoneModal.setAttribute('aria-hidden', 'true');
+}
+
+phoneCallBtn?.addEventListener('click', (e) => {
+  if (!canLikelyCall()) {
+    e.preventDefault();
+    openPhoneModal();
+  }
+  // якщо пристрій вміє дзвонити — нічого не робимо, посилання tel: відпрацює як завжди
+});
+
+phoneModalCopy?.addEventListener('click', async () => {
+  const number = phoneModalNumber?.textContent.trim() || '';
+  try {
+    await navigator.clipboard.writeText(number);
+    const original = phoneModalCopy.textContent;
+    phoneModalCopy.textContent = 'Скопійовано ✓';
+    setTimeout(() => { phoneModalCopy.textContent = original; }, 1800);
+  } catch {
+    // clipboard недоступний — просто ігноруємо, номер і так видно в тексті
+  }
+});
+
+phoneModalClose?.addEventListener('click', closePhoneModal);
+phoneModal?.addEventListener('click', (e) => {
+  if (e.target === phoneModal) closePhoneModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closePhoneModal();
+});
+
 // ============ Footer year ============
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();

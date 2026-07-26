@@ -384,6 +384,19 @@
     </div>
   </div>
 
+  <!-- PHONE NUMBER POPUP (для десктопа, де немає дзвінків) -->
+  <div class="modal-overlay" id="phoneModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="phoneModalTitle">
+      <h3 id="phoneModalTitle">Наш номер телефону</h3>
+      <p class="phone-modal-number" id="phoneModalNumber">+380 63 714 48 36</p>
+      <p>Наберіть цей номер зі свого телефону, або скопіюйте його.</p>
+      <div class="phone-modal-actions">
+        <button type="button" class="btn btn-ghost" id="phoneModalCopy">Скопіювати номер</button>
+        <button type="button" class="btn btn-primary" id="phoneModalClose">Закрити</button>
+      </div>
+    </div>
+  </div>
+
   <!-- REVIEWS -->
   <section class="section reviews" id="reviews">
     <div class="wrap">
@@ -443,7 +456,7 @@
       </form>
 
       <div class="contact-actions reveal">
-        <a href="tel:+380637144836" class="btn btn-primary magnetic">📞 Зателефонувати</a>
+        <a href="tel:+380637144836" class="btn btn-primary magnetic" id="phoneCallBtn">📞 Зателефонувати</a>
         <a href="https://www.instagram.com/sensoryiq/" target="_blank" rel="noopener" class="btn btn-ghost magnetic">Відкрити Instagram</a>
         <a href="https://ig.me/m/sensoryiq" target="_blank" rel="noopener" class="btn btn-ghost magnetic">Написати в Instagram</a>
       </div>
