@@ -393,6 +393,13 @@ code{ background: var(--surface-2); padding: 2px 8px; border-radius: 6px; font-s
 .contact-form input::placeholder, .contact-form textarea::placeholder{ color: var(--muted); }
 .contact-form input:focus, .contact-form textarea:focus{ border-color: var(--accent); }
 .contact-form .btn-primary{ justify-self:center; margin-top:4px; }
+.contact-form .btn-primary:disabled{ opacity:.6; cursor:not-allowed; }
+.contact-form input.field-invalid{ border-color:#d9534f; }
+.field-error{ display:none; color:#d9534f; font-size:0.76rem; margin-top:-6px; }
+.field-error.show{ display:block; }
+.form-status{ text-align:center; font-size:0.82rem; margin-top:2px; min-height: 1em; }
+.form-status.error{ color:#d9534f; }
+.form-status.success{ color: var(--accent); }
 .form-note{ text-align:center; font-size: 0.74rem; color: var(--muted); margin-top: 4px; }
 .contact-actions{ display:flex; gap: 14px; justify-content:center; margin-top: 28px; flex-wrap:wrap; }
 .contact-actions .btn{ min-width: 200px; justify-content:center; }

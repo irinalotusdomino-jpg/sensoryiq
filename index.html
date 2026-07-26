@@ -428,15 +428,18 @@
       <h2 class="h2 reveal center">Запис на заняття</h2>
       <p class="section-sub reveal center">Залиште контакти — ми зв’яжемось і підберемо зручний час.</p>
 
-      <form class="contact-form reveal" id="contactForm">
+      <form class="contact-form reveal" id="contactForm" novalidate>
         <div class="form-row">
           <input type="text" name="name" placeholder="Ім’я батьків" required>
-          <input type="tel" name="phone" placeholder="Номер телефону" required>
+          <div>
+            <input type="tel" name="phone" id="phoneInput" placeholder="Номер телефону" required>
+            <p class="field-error" id="phoneError">Введіть коректний номер телефону (наприклад, +380 63 714 48 36)</p>
+          </div>
         </div>
         <input type="text" name="child" placeholder="Ім’я та вік дитини">
         <textarea name="message" placeholder="Коротко про запит (необов’язково)" rows="3"></textarea>
         <button type="submit" class="btn btn-primary magnetic">Надіслати заявку</button>
-        <p class="form-note">Форма демонстраційна — підʼєднайте власний сервіс (Formspree, Telegram-бот тощо).</p>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
       </form>
 
       <div class="contact-actions reveal">

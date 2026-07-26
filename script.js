@@ -196,13 +196,73 @@ document.addEventListener('keydown', (e) => {
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// ============ Contact form (demo only) ============
+// ============ Contact form → Telegram ============
+// Куди відправляти заявки. Тут вказано адресу Cloudflare Worker,
+// який пересилає дані у Telegram-бот. Щоб перемкнути форму на
+// іншу людину/бізнес — просто заміни значення TELEGRAM_ENDPOINT
+// на URL її власного Worker'а (сам сайт більше ніде міняти не треба).
+const TELEGRAM_ENDPOINT = 'https://sensoryiq-contact-form.YOUR-SUBDOMAIN.workers.dev';
+
 const form = document.getElementById('contactForm');
-form?.addEventListener('submit', (e) => {
+const phoneInput = document.getElementById('phoneInput');
+const phoneError = document.getElementById('phoneError');
+const formStatus = document.getElementById('formStatus');
+
+// Номер вважається валідним, якщо після прибирання пробілів/дужок/тире
+// лишається 10–15 цифр (за потреби з +), і це не всі однакові цифри —
+// відсіює набори на кшталт "111111111" чи "123".
+function isValidPhone(value) {
+  const trimmed = value.trim();
+  const digitsOnly = trimmed.replace(/[^\d]/g, '');
+  if (digitsOnly.length < 10 || digitsOnly.length > 15) return false;
+  if (!/^[\d\s()+-]+$/.test(trimmed)) return false;
+  if (/^(\d)\1+$/.test(digitsOnly)) return false;
+  return true;
+}
+
+phoneInput?.addEventListener('input', () => {
+  phoneInput.classList.remove('field-invalid');
+  phoneError.classList.remove('show');
+});
+
+form?.addEventListener('submit', async (e) => {
   e.preventDefault();
+  formStatus.textContent = '';
+  formStatus.className = 'form-status';
+
+  const phoneValid = isValidPhone(phoneInput.value);
+  if (!phoneValid) {
+    phoneInput.classList.add('field-invalid');
+    phoneError.classList.add('show');
+    phoneInput.focus();
+    return;
+  }
+  phoneInput.classList.remove('field-invalid');
+  phoneError.classList.remove('show');
+
   const btn = form.querySelector('button[type="submit"]');
   const original = btn.textContent;
-  btn.textContent = 'Дякуємо! Ми зв’яжемось незабаром ✓';
-  form.reset();
-  setTimeout(() => { btn.textContent = original; }, 3200);
+  btn.disabled = true;
+  btn.textContent = 'Надсилаємо…';
+
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  try {
+    const res = await fetch(TELEGRAM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error('Request failed');
+
+    formStatus.textContent = 'Дякуємо! Ми зв’яжемось незабаром ✓';
+    formStatus.classList.add('success');
+    form.reset();
+  } catch (err) {
+    formStatus.textContent = 'Не вдалося надіслати. Спробуйте ще раз або зателефонуйте нам.';
+    formStatus.classList.add('error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = original;
+  }
 });
